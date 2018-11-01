@@ -10,6 +10,7 @@ Pod::Spec.new do |s|
 
   s.name         = "JKLocationManager"
   s.version      = "0.0.1"
+  s.swift_version = "4.2"
   s.summary      = "Extended CLLocationManager with additional event + support multiple delegates"
 
   s.homepage     = "https://github.com/jankase/JKLocationManager"
