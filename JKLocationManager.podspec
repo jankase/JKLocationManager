@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target     = "11.0"
 
-  s.source        = { :git => "https://github.com/jankase/JKLocationManager", :tag => "#{s.version}" }
+  s.source        = { :git => "https://github.com/jankase/JKLocationManager.git", :tag => "#{s.version}" }
 
   s.ios.source_files     = "JKLocationManager/*.swift"
 
