@@ -7,24 +7,23 @@ import CoreLocation
 import Foundation
 
 public class JKSharedLocationManagerDelegate: NSObject, JKLocationManagerDelegate {
+  public static var shared: JKSharedLocationManagerDelegate = .init()
 
-  public static var shared: JKSharedLocationManagerDelegate = JKSharedLocationManagerDelegate()
-
-  public var subDelegates: [CLLocationManagerDelegate] = []
-  public var defaultLocationManager: () -> JKLocationManager = { return .shared }
+  public var subDelegates: [CLLocationManagerDelegate] = .init()
+  public var defaultLocationManager: () -> JKLocationManager = { .shared }
 
   override init() {
     super.init()
     defaultLocationManager().delegate = self
   }
 
-  func register(subDelegate aSubDelegate: CLLocationManagerDelegate) {
+  public func register(subDelegate aSubDelegate: CLLocationManagerDelegate) {
     if _indexOf(subElement: aSubDelegate) == nil { // each delegate only one time
       subDelegates.append(aSubDelegate)
     }
   }
 
-  func remove(subDelegate aSubDelegate: CLLocationManagerDelegate) {
+  public func remove(subDelegate aSubDelegate: CLLocationManagerDelegate) {
     guard let theIndex = _indexOf(subElement: aSubDelegate) else {
       return
     }
@@ -120,11 +119,10 @@ public class JKSharedLocationManagerDelegate: NSObject, JKLocationManagerDelegat
   }
 
   private var _jkSubDelegates: [JKLocationManagerDelegate] {
-    return subDelegates.compactMap { return $0 as? JKLocationManagerDelegate }
+    return subDelegates.compactMap { $0 as? JKLocationManagerDelegate }
   }
 
   private func _indexOf(subElement aSubElement: CLLocationManagerDelegate) -> Int? {
-    return subDelegates.index { $0 === aSubElement }
+    return subDelegates.firstIndex { $0 === aSubElement }
   }
-
 }

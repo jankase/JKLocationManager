@@ -8,7 +8,6 @@ import Foundation
 
 @objc
 public protocol JKLocationManagerDelegate: CLLocationManagerDelegate {
-
   @objc
   optional func locationManagerDidStartUpdatingLocation(_ aManager: JKLocationManager)
   @objc
@@ -17,5 +16,4 @@ public protocol JKLocationManagerDelegate: CLLocationManagerDelegate {
   optional func locationManagerDidStartMonitoringSignificantLocationChanges(_ aManager: JKLocationManager)
   @objc
   optional func locationManagerDidStopMonitoringSignificantLocationChanges(_ aManager: JKLocationManager)
-
 }

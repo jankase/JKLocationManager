@@ -7,27 +7,29 @@ import CoreLocation
 import Foundation
 
 public class JKLocationManager: CLLocationManager {
-
-  public static var shared: JKLocationManager = JKLocationManager()
+  public static var shared: JKLocationManager = .init()
 
   public override func startUpdatingLocation() {
     super.startUpdatingLocation()
-    (delegate as? JKLocationManagerDelegate)?.locationManagerDidStartUpdatingLocation?(self)
+    _jkLocationDelegate?.locationManagerDidStartUpdatingLocation?(self)
   }
 
   public override func stopUpdatingLocation() {
     super.stopUpdatingLocation()
-    (delegate as? JKLocationManagerDelegate)?.locationManagerDidStopUpdatingLocation?(self)
+    _jkLocationDelegate?.locationManagerDidStopUpdatingLocation?(self)
   }
 
   public override func startMonitoringSignificantLocationChanges() {
     super.startMonitoringSignificantLocationChanges()
-    (delegate as? JKLocationManagerDelegate)?.locationManagerDidStartMonitoringSignificantLocationChanges?(self)
+    _jkLocationDelegate?.locationManagerDidStartMonitoringSignificantLocationChanges?(self)
   }
 
   public override func stopMonitoringSignificantLocationChanges() {
     super.stopMonitoringSignificantLocationChanges()
-    (delegate as? JKLocationManagerDelegate)?.locationManagerDidStopMonitoringSignificantLocationChanges?(self)
+    _jkLocationDelegate?.locationManagerDidStopMonitoringSignificantLocationChanges?(self)
   }
 
+  private var _jkLocationDelegate: JKLocationManagerDelegate? {
+    return delegate as? JKLocationManagerDelegate
+  }
 }
